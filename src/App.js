@@ -1,5 +1,7 @@
 import './App.css';
-import firebase from './firebase';
+// import { useEffect, useState } from 'react';
+// import { getDatabase, ref, onValue } from 'firebase/database';
+// import firebase from './firebase';
 
 function App() {
   return (
