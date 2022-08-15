@@ -33,6 +33,7 @@ function App() {
 				// pushing the values from the object into our newState array
 				newState.push({ 
 					key, 
+					isSelected: false,
 					name: data[key].name, 
 					username: data[key].username,
 					notes: data[key].notes, 
@@ -53,25 +54,21 @@ function App() {
 		const database = getDatabase(firebase);
 		const dbRef = ref(database, `/${itemId}`);
 		
-		// using the Firebase method remove(), we remove the node specific to the book ID
+		// using the Firebase method remove(), we remove the node specific to the item ID
 		remove(dbRef);
+	}
+
+	const handleRemoveAll = () => {
+		const database = getDatabase(firebase);
+        const dbRef = ref(database);
+        remove(dbRef);
 	}
 
 	return (
 		<div className="App">
 			<Header />
-			{/* <form action="submit">
-				<label htmlFor="newItem">Add a new item to your grocery list</label>
-				<input
-				type="text"
-				id="newItem"
-				onChange={handleInputChange}
-				value={userInput}
-				/>
-				<button onClick={handleSubmit}>Add new item</button>
-			</form> */}
 			<Form />
-			<GroceryList items={items} handleRemoveItem={handleRemoveItem} />
+			<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
 			<Footer />
 		</div>
 	);

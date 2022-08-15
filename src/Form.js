@@ -1,6 +1,7 @@
 // Form.js
 import { useState } from 'react';
 import { getDatabase, ref, push } from "firebase/database";
+// import { useForm } from "react-hook-form";
 import firebase from "./firebase";
 
 function Form() {
@@ -40,10 +41,11 @@ function Form() {
 
         // create new object that contains the user inputs  
         const itemObject = {
-        name: userInput,
-        username: userNameInput,
-        notes: userNotesInput,
-        quantity: userQuantityInput,
+            name: userInput,
+            username: userNameInput,
+            notes: userNotesInput,
+            quantity: userQuantityInput,
+            isSelected: false
         };
 
         // push the value of the `userInput` state to the database
@@ -56,42 +58,82 @@ function Form() {
         setUserQuantityInput("");
     };
 
+    // const validate = () => {
+    //     let inputError = "";
+
+    //     if (
+    //       userInput.length === 0
+    //     ) {
+    //       inputError = "Input fields cannot be blank.";
+    //     }
+
+    //     if (inputError) {
+    //       this.setState({ inputError });
+    //       return false;
+    //     }
+
+    //     return true;
+    //   };
+
+
+    // const { register, errors } = useForm();
+
     return (
-        <form action="submit">
-            <label htmlFor="itemDescription">
-                Add a new item to your grocery list:
-            </label>
-            <input
-                type="text"
-                id="itemDescription"
-                onChange={handleInputChange}
-                value={userInput}
-            />
-            <label htmlFor="userName">
-                Your name:
-            </label>
-            <input
-                type="text"
-                id="userName"
-                onChange={handleUserNameChange}
-                value={userNameInput}
-            />
-            <label htmlFor="itemNotes">Add notes (optional):</label>
-            <input
-                type="text"
-                id="itemNotes"
-                onChange={handleNotesChange}
-                value={userNotesInput}
-            />
-            <label htmlFor="itemQuantity">Choose the quantity:</label>
-            <input
-                type="text"
-                id="itemQuantity"
-                onChange={handleQuantityInputChange}
-                value={userQuantityInput}
-            />
-            <button onClick={handleSubmit}>Add new item</button>
-        </form>
+      <form action="submit">
+        <p>Add a new item below.</p>
+          <label htmlFor="itemDescription">Item</label>
+          <input
+            name="requiredField"
+            // ref={register({ required: true })}
+            type="text"
+            id="itemDescription"
+            onChange={handleInputChange}
+            value={userInput}
+            placeholder="Item description"
+            minLength="1"
+            maxLength="25"
+            required
+          />
+          {/* <br />
+          {errors.requiredField && <span>This field is required</span>}
+          <br /> */}
+          <label htmlFor="userName">Name</label>
+          <input
+            type="text"
+            id="userName"
+            onChange={handleUserNameChange}
+            value={userNameInput}
+            placeholder="Your name (optional)"
+            minLength="1"
+            maxLength="25"
+          />
+          <label htmlFor="itemNotes">Note</label>
+          <input
+            type="text"
+            id="itemNotes"
+            onChange={handleNotesChange}
+            value={userNotesInput}
+            placeholder="Any note (optional)"
+            minLength="1"
+            maxLength="50"
+          />
+          <label htmlFor="itemQuantity">Quantity</label>
+          <input
+            type="number"
+            id="itemQuantity"
+            onChange={handleQuantityInputChange}
+            value={userQuantityInput}
+            // placeholder="1"
+            default="1"
+            min="1"
+            max="24"
+          />
+        {/* <p className="errorMessage">{inputError}</p> */}
+
+        <button type="submit" onClick={handleSubmit}>
+          Add to List
+        </button>
+      </form>
     );
 }
 
