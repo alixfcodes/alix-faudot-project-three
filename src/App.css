@@ -5,13 +5,21 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
 
-.App {
-  text-align: center;
+/* base styles */
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #e3e4ef ;
+}
+
+.wrapper {
+  width: 60%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 a { 
@@ -27,24 +35,111 @@ button {
   cursor: pointer;
 }
 
-.list-item {
-  background-color: #F3F3F3;
-  border-radius: 15px;
+label {
+  font-weight: 600;
+  padding-bottom: 5px;
 }
 
-.quantity-item {
+input {
+  margin-bottom: 15px;
+}
+
+.button-submit,
+.button-clear {
+  background-color: #F8724B;
+  color: white;
+text-align: center; 
+padding: 6px 8px;
+border-radius: 10px;
+border: 1px solid #F8724B;
+/* box-shadow: 0px 2px 4px #F8724B; */
+transition: .1s all ease-in-out;
+}
+
+
+/* form */
+form {
   display: flex;
+  flex-direction: column;
+  background-color: white;
+  /* background-color: #02977c; */
+  padding: 40px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+
+/* .list-item {
+  background-color: #F3F3F3;
+} */
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.list-item {
+  align-self: center;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  border-bottom: 1px solid grey;
+  padding: 20px;
+  margin-bottom: 10px;
+  /* border-radius: 15px; */
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-username,
+.item-notes {
+  font-size: 14px;
+  color: grey;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
 
 }
 
 button.chevron {
   border: none;
   background-color: transparent;
-
+  padding: 10px; 
 }
 
-.fa-solid {
-  color: red;
+.fa-solid { 
+  color: white;
+}
+
+.fa-circle,
+.fa-circle-check,
+.fa-chevron-left,
+.fa-chevron-right {
+  color: #F8724B;
+}
+
+.button-delete {
+  background-color: #F8724B;
+  color: white;
+  text-align: center; 
+  padding: 1px 3px;
+  border-radius: 2px;
+  border: 1px solid #F8724B; 
 }
 
 .item-text {
@@ -61,32 +156,10 @@ button.chevron {
 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  text-align: center;
+  color: #a1a8d7;
+  padding: 15px;
 }

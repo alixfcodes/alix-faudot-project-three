@@ -65,11 +65,13 @@ function App() {
 	}
 
 	return (
-		<div className="App">
-			<Header />
-			<Form />
-			<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
-			<Footer />
+		<div className="body">
+			<div className="wrapper">
+				<Header />
+				<Form />
+				<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
+				<Footer />
+			</div>
 		</div>
 	);
 }

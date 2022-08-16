@@ -122,7 +122,7 @@ function Form() {
             type="number"
             id="itemQuantity"
             onChange={handleQuantityInputChange}
-            value={userQuantityInput}
+            value={userQuantityInput ? userQuantityInput : Number(1)}
             // placeholder="1"
             default="1"
             min="1"
@@ -130,7 +130,7 @@ function Form() {
           />
         {/* <p className="errorMessage">{inputError}</p> */}
 
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" onClick={handleSubmit} className="button-submit">
           Add to List
         </button>
       </form>

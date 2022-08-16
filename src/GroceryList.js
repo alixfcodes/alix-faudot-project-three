@@ -53,52 +53,58 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
 
     return (
       <>
-        <ul className="item-list">
+        <ul className="list-container">
           { items.map((item) => {
             return (
-              <li key={item.key} className="list-container">
+              <li key={item.key} className="list-item">
+                <div className="flex-container">
                 <div
                   className="item-name"
                   onClick={() => handleToggleComplete(item)}
                 >
-                  {item.isSelected ? (
-                      <i
-                        className="fa-solid fa-circle-check"
-                      ></i>
+                  {item.isSelected === true ? (
+                    <i className="fa-solid fa-circle-check"></i>
                   ) : (
-                    <i
-                      className="fa-solid fa-circle"
-                    ></i>
+                    <i className="fa-solid fa-circle"></i>
                   )}
-                  <span className={item.isSelected ? "complete" : "pending"}>
+                  <span className={item.isSelected === true ? "complete" : "pending"}>
                     {item.name}
                   </span>
                 </div>
-                <p>Added by: {item.username}</p>
-                <p>Note: {item.notes}</p>
-                <div className="quantity-item">
-                  <button
-                    onClick={() => handleQuantityDecrease(item)}
-                    className="chevron"
-                  >
-                    <i className="fa-solid fa-chevron-left"></i>
-                  </button>
-                  <span> {item.quantity}</span>
-                  <button
-                    onClick={() => handleQuantityIncrease(item)}
-                    className="chevron"
-                  >
-                    <i className="fa-solid fa-chevron-right"></i>
+                <div className="item-username">
+                  {item.username.length >= 1 ? (
+                    <p>Added by: {item.username}</p>
+                  ) : null}
+                </div>
+                </div>
+                <div className="item-notes">
+                  {item.notes.length >= 1 ? <p>Note: {item.notes}</p> : null}
+                </div>
+                <div className="flex-container">
+                  <div className="item-quantity">
+                    <button
+                      onClick={() => handleQuantityDecrease(item)}
+                      className="chevron"
+                    >
+                      <i className="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <span> {item.quantity ? item.quantity : 1}</span>
+                    <button
+                      onClick={() => handleQuantityIncrease(item)}
+                      className="chevron"
+                    >
+                      <i className="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <button onClick={() => handleRemoveItem(item.key)} className="button-delete">
+                    <i className="fa-solid fa-xmark"></i>
                   </button>
                 </div>
-                <button onClick={() => handleRemoveItem(item.key)}>
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
               </li>
             );
           })}
         </ul>
-        <button onClick={() => handleRemoveAll()}>Clear the list</button>
+        <button onClick={() => handleRemoveAll()} className="button-clear">Clear the list</button>
       </>
     );
 }
