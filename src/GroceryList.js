@@ -56,12 +56,16 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
 
     return (
       <>
-        <div>{items.length === 0 ? <p>What are you out of? Use the form above to add it to the list.</p> : null}</div>
+        <div>
+          {items.length === 0 ? (
+            <p>Your list is empty. Add a new item to get started.</p>
+          ) : null}
+        </div>
         <ul className="list-container">
           {items.map((item) => {
             return (
               <li key={item.key} className="list-item">
-                <div className="flex-container">
+                <div className="flex-container item-name-section">
                   <div className="item-name">
                     <button
                       className="item-checkbox"
@@ -107,6 +111,7 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
                     className="button-delete"
                   >
                     <i className="fa-solid fa-xmark"></i>
+                    {/* <p>Delete</p> */}
                   </button>
                 </div>
               </li>

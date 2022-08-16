@@ -80,8 +80,7 @@ function Form() {
 
     return (
       <>
-      <form action="submit">
-        <p>Add a new item below.</p>
+        <form action="submit">
           <label htmlFor="itemDescription">Item</label>
           <input
             name="requiredField"
@@ -94,6 +93,7 @@ function Form() {
             minLength="1"
             maxLength="25"
             required
+            autofocus
           />
           {/* <br />
           {errors.requiredField && <span>This field is required</span>}
@@ -123,18 +123,22 @@ function Form() {
             type="number"
             id="itemQuantity"
             onChange={handleQuantityInputChange}
-            value={userQuantityInput ? userQuantityInput : 1}
+            value={userQuantityInput.length === 0 ? "1" : userQuantityInput}
             placeholder="Defaults to 1 (optional)"
-            default="1"
             min="1"
             max="24"
           />
-        {/* <p className="errorMessage">{inputError}</p> */}
+          {/* <p className="errorMessage">{inputError}</p> */}
 
-        <button type="submit" onClick={handleSubmit} className="button-submit" disabled={!userInput}>
-          Add to List
-        </button>
-      </form>
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="button-submit"
+            disabled={!userInput}
+          >
+            Add to List
+          </button>
+        </form>
       </>
     );
 }
