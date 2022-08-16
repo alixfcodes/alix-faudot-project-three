@@ -79,6 +79,7 @@ function Form() {
     // const { register, errors } = useForm();
 
     return (
+      <>
       <form action="submit">
         <p>Add a new item below.</p>
           <label htmlFor="itemDescription">Item</label>
@@ -89,7 +90,7 @@ function Form() {
             id="itemDescription"
             onChange={handleInputChange}
             value={userInput}
-            placeholder="Item description"
+            placeholder="Item description (required)"
             minLength="1"
             maxLength="25"
             required
@@ -105,7 +106,7 @@ function Form() {
             value={userNameInput}
             placeholder="Your name (optional)"
             minLength="1"
-            maxLength="25"
+            maxLength="20"
           />
           <label htmlFor="itemNotes">Note</label>
           <input
@@ -122,18 +123,19 @@ function Form() {
             type="number"
             id="itemQuantity"
             onChange={handleQuantityInputChange}
-            value={userQuantityInput ? userQuantityInput : Number(1)}
-            // placeholder="1"
+            value={userQuantityInput ? userQuantityInput : 1}
+            placeholder="Defaults to 1 (optional)"
             default="1"
             min="1"
             max="24"
           />
         {/* <p className="errorMessage">{inputError}</p> */}
 
-        <button type="submit" onClick={handleSubmit} className="button-submit">
+        <button type="submit" onClick={handleSubmit} className="button-submit" disabled={!userInput}>
           Add to List
         </button>
       </form>
+      </>
     );
 }
 

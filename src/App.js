@@ -33,7 +33,7 @@ function App() {
 				// pushing the values from the object into our newState array
 				newState.push({ 
 					key, 
-					isSelected: false,
+					isSelected: data[key].isSelected,
 					name: data[key].name, 
 					username: data[key].username,
 					notes: data[key].notes, 
@@ -65,14 +65,12 @@ function App() {
 	}
 
 	return (
-		<div className="body">
 			<div className="wrapper">
 				<Header />
 				<Form />
 				<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
 				<Footer />
 			</div>
-		</div>
 	);
 }
 

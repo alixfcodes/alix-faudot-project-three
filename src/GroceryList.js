@@ -2,6 +2,7 @@
 import { getDatabase, ref, update } from "firebase/database";
 import firebase from "./firebase";
 
+
 function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
 
     const handleQuantityDecrease = (item) => {
@@ -9,12 +10,12 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
         const dbRef = ref(database, `/${item.key}`);
 
         const itemObject = {
-            name: item.name,
-            isSelected: false,
-            username: item.username,
-            notes: item.notes,
-            quantity:
-                Number(item.quantity) - 1 < 1 ? 1 : Number(item.quantity) - 1,
+          isSelected: false,
+          name: item.name,
+          username: item.username,
+          notes: item.notes,
+          quantity:
+            Number(item.quantity) - 1 < 1 ? 1 : Number(item.quantity) - 1,
         };
 
         update(dbRef, itemObject);
@@ -25,11 +26,11 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
         const dbRef = ref(database, `/${item.key}`);
 
         const itemObject = {
-            name: item.name,
-            isSelected: false,
-            username: item.username,
-            notes: item.notes,
-            quantity: Number(item.quantity) + 1
+          isSelected: false,
+          name: item.name,
+          username: item.username,
+          notes: item.notes,
+          quantity: Number(item.quantity) + 1,
         };
 
         update(dbRef, itemObject);
@@ -41,41 +42,46 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
               const dbRef = ref(database, `/${item.key}`);
 
               const itemObject = {
-                name: item.name,
                 isSelected: !item.isSelected,
+                name: item.name,
                 username: item.username,
                 notes: item.notes,
                 quantity: item.quantity,
               };
 
               update(dbRef, itemObject);
+
+              console.log(itemObject);
             };
 
     return (
       <>
+        <div>{items.length === 0 ? <p>What are you out of? Use the form above to add it to the list.</p> : null}</div>
         <ul className="list-container">
-          { items.map((item) => {
+          {items.map((item) => {
             return (
               <li key={item.key} className="list-item">
                 <div className="flex-container">
-                <div
-                  className="item-name"
-                  onClick={() => handleToggleComplete(item)}
-                >
-                  {item.isSelected === true ? (
-                    <i className="fa-solid fa-circle-check"></i>
-                  ) : (
-                    <i className="fa-solid fa-circle"></i>
-                  )}
-                  <span className={item.isSelected === true ? "complete" : "pending"}>
-                    {item.name}
-                  </span>
-                </div>
-                <div className="item-username">
-                  {item.username.length >= 1 ? (
-                    <p>Added by: {item.username}</p>
-                  ) : null}
-                </div>
+                  <div className="item-name">
+                    <button
+                      className="item-checkbox"
+                      onClick={() => handleToggleComplete(item)}
+                    >
+                      {item.isSelected ? (
+                        <i className="fa-solid fa-circle-check"></i>
+                      ) : (
+                        <i className="fa-solid fa-circle"></i>
+                      )}
+                    </button>
+                    <span className={item.isSelected ? "complete" : "pending"}>
+                      {item.name}
+                    </span>
+                  </div>
+                  <div className="item-username">
+                    {item.username.length >= 1 ? (
+                      <p>Added by: {item.username}</p>
+                    ) : null}
+                  </div>
                 </div>
                 <div className="item-notes">
                   {item.notes.length >= 1 ? <p>Note: {item.notes}</p> : null}
@@ -96,7 +102,10 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
                       <i className="fa-solid fa-chevron-right"></i>
                     </button>
                   </div>
-                  <button onClick={() => handleRemoveItem(item.key)} className="button-delete">
+                  <button
+                    onClick={() => handleRemoveItem(item.key)}
+                    className="button-delete"
+                  >
                     <i className="fa-solid fa-xmark"></i>
                   </button>
                 </div>
@@ -104,7 +113,11 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
             );
           })}
         </ul>
-        <button onClick={() => handleRemoveAll()} className="button-clear">Clear the list</button>
+        <div className="button-clear-container">
+          <button onClick={() => handleRemoveAll()} className="button-clear">
+            Clear the list
+          </button>
+        </div>
       </>
     );
 }

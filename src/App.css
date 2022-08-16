@@ -7,6 +7,10 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 
 /* base styles */
 
+html {
+  font-size: 125%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +21,8 @@ body {
 }
 
 .wrapper {
-  width: 60%;
-  max-width: 500px;
+  width: 70%;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -35,6 +39,25 @@ button {
   cursor: pointer;
 }
 
+/* header */
+
+header {
+  padding-bottom: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  padding: 40px 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+
 label {
   font-weight: 600;
   padding-bottom: 5px;
@@ -42,7 +65,18 @@ label {
 
 input {
   margin-bottom: 15px;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
 }
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #cccccc;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 
 .button-submit,
 .button-clear {
@@ -55,7 +89,6 @@ border: 1px solid #F8724B;
 /* box-shadow: 0px 2px 4px #F8724B; */
 transition: .1s all ease-in-out;
 }
-
 
 /* form */
 form {
@@ -104,6 +137,11 @@ form {
   justify-content: space-between;
 }
 
+.item-checkbox {
+  border: transparent;
+  background-color: transparent;
+}
+
 .item-username,
 .item-notes {
   font-size: 14px;
@@ -133,6 +171,11 @@ button.chevron {
   color: #F8724B;
 }
 
+
+.fa-circle-check {
+  color: grey;
+}
+
 .button-delete {
   background-color: #F8724B;
   color: white;
@@ -147,17 +190,19 @@ button.chevron {
 
 }
 
-.complete-strikethrough {
-  text-decoration: line-through;
-}
-
 .complete {
     text-decoration: line-through;
+    color: grey;
+}
 
+.button-clear-container {
+  display: flex;
+  justify-content: right;
 }
 
 
 
+/* footer */
 footer {
   text-align: center;
   color: #a1a8d7;
