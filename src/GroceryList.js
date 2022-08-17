@@ -54,7 +54,7 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
             };
 
     return (
-      <>
+      <section className="list-section">
         <div>
           {items.length === 0 ? (
             <p>Your list is empty. Add a new item to get started.</p>
@@ -123,7 +123,7 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
             </button>
           </div>
         )}
-      </>
+      </section>
     );
 }
 
