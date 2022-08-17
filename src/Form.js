@@ -1,120 +1,118 @@
 // Form.js
 import { useState } from 'react';
 import { getDatabase, ref, push } from "firebase/database";
-// import { useForm } from "react-hook-form";
 import firebase from "./firebase";
 
 function Form() {
-    const [userInput, setUserInput] = useState("");
+	// setting states for the different inputs on the form
+	const [userInput, setUserInput] = useState("");
 
-    const [userNameInput, setUserNameInput] = useState("");
+	const [userNameInput, setUserNameInput] = useState("");
 
-    const [userNotesInput, setUserNotesInput] = useState("");
+	const [userNotesInput, setUserNotesInput] = useState("");
 
-    const [userQuantityInput, setUserQuantityInput] = useState("");
+	const [userQuantityInput, setUserQuantityInput] = useState("");
 
-    // those events will fire every time there is a change in the different inputs they are attached to
-    const handleInputChange = (event) => {
-        // we're telling React to update the state of our `App` component to be equal to whatever is currently the value of the input field
-        setUserInput(event.target.value);
-    };
+	// those events will fire every time there is a change in the different inputs they are attached to
+	const handleInputChange = (event) => {
+		setUserInput(event.target.value);
+	};
 
-    const handleUserNameChange = (event) => {
-        setUserNameInput(event.target.value);
-    };
+	const handleUserNameChange = (event) => {
+		setUserNameInput(event.target.value);
+	};
 
-    const handleNotesChange = (event) => {
-        setUserNotesInput(event.target.value);
-    };
+	const handleNotesChange = (event) => {
+		setUserNotesInput(event.target.value);
+	};
 
-    const handleQuantityInputChange = (event) => {
-        setUserQuantityInput(event.target.value);
-    };
+	const handleQuantityInputChange = (event) => {
+		setUserQuantityInput(event.target.value);
+	};
 
-    const handleSubmit = (event) => {
-        // event.preventDefault prevents the default action (form submission and page refresh)
-        event.preventDefault();
+	// handle submit on form
+	const handleSubmit = (event) => {
+		// event.preventDefault prevents the default action (form submission and page refresh)
+		event.preventDefault();
 
-        // 	create a reference to our database
-        const database = getDatabase(firebase);
-        const dbRef = ref(database);
+		// 	create a reference to our database
+		const database = getDatabase(firebase);
+		const dbRef = ref(database);
 
-        // create new object that contains the user inputs  
-        const itemObject = {
-            name: userInput,
-            username: userNameInput,
-            notes: userNotesInput,
-            quantity: userQuantityInput,
-            isSelected: false
-        };
+		// create new object that contains the user inputs  
+		const itemObject = {
+			name: userInput,
+			username: userNameInput,
+			notes: userNotesInput,
+			quantity: userQuantityInput,
+			isSelected: false
+		};
 
-        // push the value of the `userInput` state to the database
-        push(dbRef, itemObject);
+		// push the value of the `userInput` states (in the new object) to the database
+		push(dbRef, itemObject);
 
-        // reset the state to an empty string
-        setUserInput("");
-        setUserNameInput("");
-        setUserNotesInput("");
-        setUserQuantityInput("");
-    };
+		// reset the state to an empty string
+		setUserInput("");
+		setUserNameInput("");
+		setUserNotesInput("");
+		setUserQuantityInput("");
+	};
 
-    return (
-      <>
-        <form action="submit">
-          <label htmlFor="itemDescription">Item</label>
-          <input
-            name="requiredField"
-            type="text"
-            id="itemDescription"
-            onChange={handleInputChange}
-            value={userInput}
-            placeholder="Item description (required)"
-            minLength="1"
-            maxLength="25"
-            required
-            autofocus
-          />
-          <label htmlFor="userName">Name</label>
-          <input
-            type="text"
-            id="userName"
-            onChange={handleUserNameChange}
-            value={userNameInput}
-            placeholder="Your name (optional)"
-            minLength="1"
-            maxLength="20"
-          />
-          <label htmlFor="itemNotes">Note</label>
-          <input
-            type="text"
-            id="itemNotes"
-            onChange={handleNotesChange}
-            value={userNotesInput}
-            placeholder="Any note (optional)"
-            minLength="1"
-            maxLength="50"
-          />
-          <label htmlFor="itemQuantity">Quantity</label>
-          <input
-            type="number"
-            id="itemQuantity"
-            onChange={handleQuantityInputChange}
-            value={userQuantityInput}
-            placeholder="Defaults to 1 (optional)"
-            min="1"
-            max="24"
-          />
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="button-submit"
-            disabled={!userInput}
-          >
-            Add to List
-          </button>
-        </form>
-      </>
-    );
+	return (
+		<form action="submit">
+			<label htmlFor="itemDescription">Item</label>
+			<input
+			name="requiredField"
+			type="text"
+			id="itemDescription"
+			onChange={handleInputChange}
+			value={userInput}
+			placeholder="Item description (required)"
+			minLength="1"
+			maxLength="25"
+			required
+			autofocus
+			/>
+			<label htmlFor="userName">Name</label>
+			<input
+			type="text"
+			id="userName"
+			onChange={handleUserNameChange}
+			value={userNameInput}
+			placeholder="Your name (optional)"
+			minLength="1"
+			maxLength="20"
+			/>
+			<label htmlFor="itemNotes">Note</label>
+			<input
+			type="text"
+			id="itemNotes"
+			onChange={handleNotesChange}
+			value={userNotesInput}
+			placeholder="Any note (optional)"
+			minLength="1"
+			maxLength="50"
+			/>
+			<label htmlFor="itemQuantity">Quantity</label>
+			<input
+			type="number"
+			id="itemQuantity"
+			onChange={handleQuantityInputChange}
+			value={userQuantityInput}
+			placeholder="Defaults to 1 (optional)"
+			min="1"
+			max="24"
+			/>
+			<button
+			type="submit"
+			onClick={handleSubmit}
+			className="button-submit"
+			disabled={!userInput}
+			>
+			Add to List
+			</button>
+		</form>
+	);
 }
 
 export default Form;

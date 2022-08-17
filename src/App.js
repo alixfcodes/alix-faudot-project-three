@@ -8,6 +8,7 @@ import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import firebase from './firebase';
 
 function App() {
+	// setting state for items in our database
 	const [items, setItems] = useState([]);
 
 	useEffect(() => {
@@ -36,7 +37,6 @@ function App() {
 					notes: data[key].notes, 
 					quantity: data[key].quantity 
 				});
-				console.log(data[key]);
 			}	
 
 			// calling setItems in order to update our component's state using the local array newState
@@ -44,16 +44,17 @@ function App() {
 		});
 	}, []);
 
+	// handle removal of each individual item from the database
 	const handleRemoveItem = (itemId) => {
-    // create a reference to the database
-    // this time instead of pointing at the whole database, we make our dbRef point to the specific node of the item we want to remove
-    const database = getDatabase(firebase);
-    const dbRef = ref(database, `/${itemId}`);
+		// create a reference to the database
+		const database = getDatabase(firebase);
+		const dbRef = ref(database, `/${itemId}`);
 
-    // removing the node specific to the item ID, using the Firebase method remove()
-    remove(dbRef);
-  }
+		// removing the node specific to the item ID, using the Firebase method remove()
+		remove(dbRef);
+	}
 
+	// handle removal of all items in the database
 	const handleRemoveAll = () => {
 		const database = getDatabase(firebase);
         const dbRef = ref(database);
@@ -61,12 +62,12 @@ function App() {
 	}
 
 	return (
-			<div className="wrapper">
-				<Header />
-				<Form />
-				<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
-				<Footer />
-			</div>
+		<div className="wrapper">
+			<Header />
+			<Form />
+			<GroceryList items={items} handleRemoveItem={handleRemoveItem} handleRemoveAll={handleRemoveAll} />
+			<Footer />
+		</div>
 	);
 }
 
