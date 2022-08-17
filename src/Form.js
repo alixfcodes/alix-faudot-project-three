@@ -58,33 +58,12 @@ function Form() {
         setUserQuantityInput("");
     };
 
-    // const validate = () => {
-    //     let inputError = "";
-
-    //     if (
-    //       userInput.length === 0
-    //     ) {
-    //       inputError = "Input fields cannot be blank.";
-    //     }
-
-    //     if (inputError) {
-    //       this.setState({ inputError });
-    //       return false;
-    //     }
-
-    //     return true;
-    //   };
-
-
-    // const { register, errors } = useForm();
-
     return (
       <>
         <form action="submit">
           <label htmlFor="itemDescription">Item</label>
           <input
             name="requiredField"
-            // ref={register({ required: true })}
             type="text"
             id="itemDescription"
             onChange={handleInputChange}
@@ -95,9 +74,6 @@ function Form() {
             required
             autofocus
           />
-          {/* <br />
-          {errors.requiredField && <span>This field is required</span>}
-          <br /> */}
           <label htmlFor="userName">Name</label>
           <input
             type="text"
@@ -123,13 +99,11 @@ function Form() {
             type="number"
             id="itemQuantity"
             onChange={handleQuantityInputChange}
-            value={userQuantityInput.length === 0 ? "1" : userQuantityInput}
+            value={userQuantityInput}
             placeholder="Defaults to 1 (optional)"
             min="1"
             max="24"
           />
-          {/* <p className="errorMessage">{inputError}</p> */}
-
           <button
             type="submit"
             onClick={handleSubmit}

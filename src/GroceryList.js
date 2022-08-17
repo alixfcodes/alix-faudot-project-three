@@ -2,7 +2,6 @@
 import { getDatabase, ref, update } from "firebase/database";
 import firebase from "./firebase";
 
-
 function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
 
     const handleQuantityDecrease = (item) => {
@@ -65,7 +64,7 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
           {items.map((item) => {
             return (
               <li key={item.key} className="list-item">
-                <div className="flex-container item-name-section">
+                <div className="item-name-section">
                   <div className="item-name">
                     <button
                       className="item-checkbox"
@@ -90,7 +89,7 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
                 <div className="item-notes">
                   {item.notes.length >= 1 ? <p>Note: {item.notes}</p> : null}
                 </div>
-                <div className="flex-container">
+                <div className="item-quantity-delete">
                   <div className="item-quantity">
                     <button
                       onClick={() => handleQuantityDecrease(item)}
@@ -111,18 +110,19 @@ function GroceryList({ items, handleRemoveItem, handleRemoveAll }) {
                     className="button-delete"
                   >
                     <i className="fa-solid fa-xmark"></i>
-                    {/* <p>Delete</p> */}
                   </button>
                 </div>
               </li>
             );
           })}
         </ul>
-        <div className="button-clear-container">
-          <button onClick={() => handleRemoveAll()} className="button-clear">
-            Clear the list
-          </button>
-        </div>
+        {items.length === 0 ? null : (
+          <div className="button-clear-container">
+            <button onClick={() => handleRemoveAll()} className="button-clear">
+              Clear the list
+            </button>
+          </div>
+        )}
       </>
     );
 }
