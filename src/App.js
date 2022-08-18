@@ -12,23 +12,16 @@ function App() {
 	const [items, setItems] = useState([]);
 
 	useEffect(() => {
-		// variable holding our database details
 		const database = getDatabase(firebase);
 
-		// variable making reference to our database
 		const dbRef = ref(database);
 
-		// event listener to that variable that will fire from the database, and call that data 'response'
 		onValue(dbRef, (response) => {
-			// variable storing the new state we want to introduce to our app
 			const newState = [];
 
-			// variable storing the response from our query to Firebase with .val() method
 			const data = response.val();
 
-			// data is an object, so we iterate through it using a for in loop to access each item name
 			for (let key in data) {
-				// pushing the values from the object into our newState array
 				newState.push({ 
 					key, 
 					isSelected: data[key].isSelected,
@@ -39,7 +32,6 @@ function App() {
 				});
 			}	
 
-			// calling setItems in order to update our component's state using the local array newState
 			setItems(newState);
 		});
 	}, []);

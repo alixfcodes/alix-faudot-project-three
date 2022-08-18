@@ -13,7 +13,7 @@ function Form() {
 
 	const [userQuantityInput, setUserQuantityInput] = useState("");
 
-	// those events will fire every time there is a change in the different inputs they are attached to
+	// setting function events will fire every time there is a change in the different inputs they are attached to
 	const handleInputChange = (event) => {
 		setUserInput(event.target.value);
 	};
@@ -32,10 +32,8 @@ function Form() {
 
 	// handle submit on form
 	const handleSubmit = (event) => {
-		// event.preventDefault prevents the default action (form submission and page refresh)
 		event.preventDefault();
 
-		// 	create a reference to our database
 		const database = getDatabase(firebase);
 		const dbRef = ref(database);
 
@@ -48,7 +46,7 @@ function Form() {
 			isSelected: false
 		};
 
-		// push the value of the `userInput` states (in the new object) to the database
+		// push the value of the different states (in the new object) to the database
 		push(dbRef, itemObject);
 
 		// reset the state to an empty string
